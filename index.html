@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morfologia e Classes Gramaticais - Prof. Paulo Bispo</title>
+    <!--
+        Carrega o Tailwind CSS CDN (Content Delivery Network).
+        Isso nos permite usar classes de estilo do Tailwind diretamente no HTML e React.
+        Ele é usado para deixar a apresentação com um visual moderno e responsivo.
+    -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /*
+            Define que o elemento raiz onde o React será montado (#root)
+            ocupará 100% da altura da tela, garantindo que a apresentação
+            ocupe todo o espaço disponível. Também centraliza o conteúdo.
+        */
+        #root {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f3f4f6; /* Cor de fundo geral */
+        }
+    </style>
+</head>
+<body>
+    <!-- Mensagem para navegadores sem JavaScript -->
+    <noscript>
+        <div style="text-align: center; padding: 20px; background-color: #ffe0b2; color: #ff6f00; font-family: sans-serif; border-radius: 8px; margin: 20px;">
+            Este aplicativo requer JavaScript para funcionar. Por favor, habilite o JavaScript no seu navegador.
+        </div>
+    </noscript>
+
+    <!--
+        Este é o elemento "raiz" (root) onde o React vai injetar todo o seu conteúdo.
+        É o ponto de partida do seu aplicativo React no HTML.
+    -->
+    <div id="root"></div>
+
+    <!--
+        Carrega as bibliotecas do React e ReactDOM.
+        React é a biblioteca principal para construir interfaces de usuário.
+        ReactDOM é a biblioteca que "conecta" o React com o DOM (Document Object Model) do navegador,
+        permitindo que o React altere o HTML na tela.
+    -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <!--
+        Carrega o Babel Standalone.
+        O Babel é uma ferramenta que "traduz" o código JSX (a sintaxe do React que mistura HTML e JavaScript)
+        para JavaScript puro que o navegador entende.
+        Neste exemplo simples, usamos a versão "standalone" que faz essa tradução
+        diretamente no navegador. Para projetos maiores, isso é feito em uma etapa anterior (build).
+    -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!--
+        Aqui é onde o seu código React (o componente 'App') será colocado e executado.
+        O atributo 'type="text/babel"' informa ao navegador para usar o Babel para processar este script.
+    -->
+    <script type="text/babel">
+        // ----- INÍCIO DO CÓDIGO DO SEU COMPONENTE REACT (App.js) -----
+        // O conteúdo de dados da apresentação
+        const presentationContent = {
+            main: {
+                title: "Morfologia e Classes Gramaticais: Os Blocos de Construção da Nossa Língua!",
+                subtitle: "Apresentação para: Alunos do Ensino Fundamental II | Disciplina: Língua Portuguesa | Professor: Paulo Bispo",
+                sections: [
+                { id: 'intro', title: '1. O Jogo das Palavras', icon: '🧩', color: 'bg-blue-200' },
+                { id: 'classesOverview', title: '2. Quem é Quem no Nosso Time?', icon: '👥', color: 'bg-green-200' },
+                { id: 'variaveis', title: '3. Classes VARIÁVEIS', icon: '🔄', color: 'bg-yellow-200' },
+                { id: 'invariaveis', title: '4. Classes INVARIÁVEIS', icon: '🔒', color: 'bg-red-200' },
+                { id: 'pratica', title: '5. Hora da Prática', icon: '🔍', color: 'bg-purple-200' },
+                { id: 'conclusion', title: '6. Conclusão', icon: '🌟', color: 'bg-indigo-200' },
+                ]
+            },
+            intro: {
+                title: "1. Abertura e Introdução: Bem-vindos ao Jogo das Palavras!",
+                content: [
+                "Boas-vindas calorosas do Professor Paulo Bispo.",
+                "Você já parou para pensar como as palavras funcionam? Elas são como peças de um grande jogo ou jogadores de um time, cada uma com um papel especial!",
+                "**Morfologia:** É a parte da gramática que estuda a formação e a estrutura das palavras. Pense nela como o estudo das 'peças' do nosso jogo."
+                ],
+                visual: "Uma imagem vibrante de peças de LEGO coloridas formando palavras ou frases simples. Alternativa: Uma ilustração de um tabuleiro de jogo de tabuleiro com ícones de palavras."
+            },
+            classesOverview: {
+                title: "2. As Classes Gramaticais: Quem é Quem no Nosso Time da Língua?",
+                content: [
+                "Assim como num time de futebol, onde cada jogador tem uma posição (atacante, goleiro, zagueiro), as palavras também têm seus 'papéis' ou 'funções' na frase.",
+                "Apresentar que existem 10 classes gramaticais.",
+                "Divisão principal:",
+                "- **Classes Variáveis:** As palavras que MUDAM (gênero, número, tempo...).",
+                "- **Classes Invariáveis:** As palavras que NÃO MUDAM."
+                ],
+                visual: "Um gráfico ou ilustração mostrando 10 ícones diferentes, cada um representando uma classe gramatical. Uma linha divisória animada que separe claramente os ícones em dois grupos: 'Variáveis' e 'Invariáveis'."
+            },
+            variaveis: {
+                title: "3. As Classes VARIÁVEIS: Palavras que Mudam!",
+                introContent: "Essas palavras são 'flexíveis', elas se adaptam e mudam de forma para combinar com o que querem expressar!",
+                classes: [
+                { id: 'substantivo', title: 'Substantivo: O Nome de Tudo!', icon: '🏷️' },
+                { id: 'artigo', title: 'Artigo: O Companheiro Fiel!', icon: '🔍' },
+                { id: 'adjetivo', title: 'Adjetivo: Dando Qualidade!', icon: '🌟' },
+                { id: 'numeral', title: 'Numeral: Contando e Ordenando!', icon: '🔢' },
+                { id: 'pronome', title: 'Pronome: O Substituto Especial!', icon: '🗣️' },
+                { id: 'verbo', title: 'Verbo: A Ação, o Estado e o Fenômeno!', icon: '⚡' },
+                ]
+            },
+            substantivo: {
+                title: "Substantivo: O Nome de Tudo!",
+                content: [
+                "Substantivo é a palavra que dá **nome** a tudo que existe ou imaginamos: pessoas, animais, objetos, lugares, sentimentos, ideias.",
+                "**Comum:** Nomeia seres da mesma espécie (ex: `cachorro`, `cidade`).",
+                "**Próprio:** Nomeia seres específicos (ex: `Rex`, `São Paulo`). Sempre com letra maiúscula!",
+                "**Flexão:** Muda em gênero (masculino/feminino) e número (singular/plural). Ex: `menino`/`menina`, `livro`/`livros`."
+                ],
+                visual: "No centro, um grande ícone de uma etiqueta de nome (`Tag`) ou um balão de fala com a palavra 'NOME'. Ao redor, pequenas imagens ou ícones representando: um cachorro, uma cidade, um livro, mãos segurando um coração (sentimento). Para flexão: Exemplo animado mostrando 'GATO' se transformando em 'GATA' e depois em 'GATOS' e 'GATAS'."
+            },
+            artigo: {
+                title: "Artigo: O Companheiro Fiel do Substantivo",
+                content: [
+                "O artigo é uma palavrinha que sempre **acompanha o substantivo**, indicando se ele é conhecido ou não, e também seu gênero e número.",
+                "**Definidos:** `o`, `a`, `os`, `as` (indicam algo específico, que já conhecemos). Ex: `A` professora, `Os` alunos.",
+                "**Indefinidos:** `um`, `uma`, `uns`, `umas` (indicam algo genérico, não específico). Ex: `Uma` ideia, `Uns` colegas."
+                ],
+                visual: "Um ícone de uma lupa ou um farol, destacando a função de 'definir' ou 'apontar'. Duas cenas: Cena 1: Um carro vermelho específico com a frase 'O carro'. Cena 2: Um carro azul genérico com a frase 'Um carro'."
+            },
+            adjetivo: {
+                title: "Adjetivo: Dando Qualidade às Coisas!",
+                content: [
+                "O adjetivo é a palavra que dá **qualidade**, característica ou estado ao substantivo.",
+                "Ele 'descreve' o substantivo!",
+                "**Flexão:** Muda em gênero, número e grau. Ex: `bonito`/`bonita`, `felizes`, `muito inteligente`."
+                ],
+                visual: "Um ícone de um selo de qualidade ou uma estrela cintilante. Ao centro, uma imagem simples de uma maçã vermelha. Ao redor da maçã, balões de fala ou etiquetas com adjetivos: `vermelha`, `crocante`, `saborosa`, `grande`."
+            },
+            numeral: {
+                title: "Numeral: Contando e Ordenando Tudo!",
+                content: [
+                "O numeral é a palavra que indica **quantidade**, posição (ordem), fração ou multiplicação.",
+                "**Cardinais:** `um`, `dois`, `três` (quantidade).",
+                "**Ordinais:** `primeiro`, `segundo`, `terceiro` (ordem).",
+                "**Fracionários:** `metade`, `terço` (fração).",
+                "**Multiplicativos:** `dobro`, `triplo` (multiplicação)."
+                ],
+                visual: "Um ícone de uma calculadora ou um ábaco. Imagens simples para cada tipo: dois lápis (`duas` canetas), uma pessoa no pódio (`primeiro` lugar), uma pizza cortada ao meio (`metade` da pizza), uma seta dupla (`dobro`)."
+            },
+            pronome: {
+                title: "Pronome: O Substituto e o Companheiro Especial!",
+                content: [
+                "O pronome é uma palavra que pode **substituir o substantivo** (para evitar repetição) ou **acompanhá-lo**, indicando algo sobre ele.",
+                "**Exemplos com Pessoas:** `Eu`, `você`, `ele`/`ela`, `nós`, `vós`, `eles`/`elas`.",
+                "**Exemplos com Posse:** `meu`/`minha`, `seu`/`sua`, `nosso`/`nossa`.",
+                "**Exemplos para Apontar:** `este`/`esta`, `esse`/`essa`, `aquele`/`aquela`."
+                ],
+                visual: "Um ícone de um balão de fala com uma seta curvada (simbolizando a substituição). Cenas com balões de fala: Cena 1: Um menino sorrindo. Frase: 'Pedro é legal.' Balão: 'Ele é legal.' (substituindo Pedro por Ele). Cena 2: Uma mão segurando um livro. Frase: 'Este livro é meu.' (acompanhando o substantivo)."
+            },
+            verbo: {
+                title: "Verbo: A Ação, o Estado e o Fenômeno!",
+                content: [
+                "O verbo é a palavra que expressa **ação** (correr, pular), **estado** (ser, estar, ficar) ou **fenômeno da natureza** (chover, nevar).",
+                "Ele nos diz `O QUE ACONTECE`!",
+                "**Flexão:** Muda muito! Indicam:",
+                "- **Tempo:** `presente` (eu corro), `passado` (eu corri), `futuro` (eu correrei).",
+                "- **Modo:** Indicativo (certeza), Subjuntivo (dúvida), Imperativo (ordem).",
+                "- **Pessoa:** `eu`, `tu`, `ele`/`ela`, `nós`, `vós`, `eles`/`elas`."
+                ],
+                visual: "Um ícone de um relógio (para tempo) ou um ponto de exclamação (para ação). Pequenas animações ou sequências de imagens: Ação: Uma pessoa correndo, uma pessoa lendo. Estado: Uma pessoa dormindo, uma pessoa triste. Fenômeno: Chuva caindo, um raio."
+            },
+            invariaveis: {
+                title: "4. As Classes INVARIÁVEIS: Palavras Que Não Mudam!",
+                introContent: "Essas palavras são 'teimosas': elas **não mudam de forma**, não têm masculino/feminino, nem singular/plural, nem tempo!",
+                classes: [
+                { id: 'adverbio', title: 'Advérbio: O Temperinho da Frase!', icon: '🧂' },
+                { id: 'preposicao', title: 'Preposição: A Conexão Essencial!', icon: '🔗' },
+                { id: 'conjuncao', title: 'Conjunção: A Ponte entre Frases!', icon: '🌉' },
+                { id: 'interjeicao', title: 'Interjeição: A Emoção em Uma Palavra!', icon: '❗' },
+                ]
+            },
+            adverbio: {
+                title: "Advérbio: O Temperinho da Frase!",
+                content: [
+                "O advérbio é uma palavra que **modifica** (dá uma 'temperada') ao verbo, a um adjetivo ou a outro advérbio, indicando uma **circunstância**.",
+                "**Circunstâncias Comuns:**",
+                "- `Lugar`: `aqui`, `lá`, `fora`.",
+                "- `Tempo`: `hoje`, `sempre`, `cedo`.",
+                "- `Modo`: `bem`, `mal`, `rapidamente`.",
+                "- `Intensidade`: `muito`, `pouco`, `demais`.",
+                "- `Negação`: `não`, `nunca`.",
+                "- `Afirmação`: `sim`, `certamente`."
+                ],
+                visual: "Um ícone de um saleiro ou um tempero. Uma cena simples de uma pessoa andando. Animações mostrando a pessoa andando: `anda *rapidamente*` (seta para velocidade), `anda *lentamente*` (seta para lentidão), `anda *lá*` (seta para um lugar)."
+            },
+            preposicao: {
+                title: "Preposição: A Conexão Essencial",
+                content: [
+                "A preposição é uma palavra que **liga** duas palavras ou ideias, estabelecendo uma **relação** entre elas.",
+                "São pequenas, mas muito importantes para dar sentido!",
+                "**Exemplos Comuns:** `de`, `em`, `para`, `com`, `sem`, `por`, `a`, `contra`.",
+                "**Exemplos:** `copo *de* água`, `chegar *em* casa`, `presente *para* você`."
+                ],
+                visual: "Um ícone de dois elos de corrente ou uma ponte conectando dois blocos de texto. Diagramas simples: `Copo` --(DE)--> `Água`, `Ir` --(PARA)--> `Escola`."
+            },
+            conjuncao: {
+                title: "Conjunção: A Ponte entre Frases!",
+                content: [
+                "A conjunção é uma palavra que **liga duas orações** (frases com verbos) ou termos de mesma função, criando uma ponte entre as ideias.",
+                "Elas podem indicar: soma (`e`), oposição (`mas`), escolha (`ou`), motivo (`porque`), tempo (`quando`).",
+                "**Exemplos:** 'Eu estudo `e` aprendo.' 'Ele queria ir, `mas` não pôde.' "
+                ],
+                visual: "Um ícone de uma ponte ou um aperto de mãos. Duas nuvens de balão de fala separadas, e uma 'ponte' (a conjunção, ex: 'E') as conecta, mostrando frases inteiras."
+            },
+            interjeicao: {
+                title: "Interjeição: A Emoção em Uma Palavra!",
+                content: [
+                "A interjeição é uma palavra (ou expressão) que expressa **emoção**, sensação, estado de espírito ou até um chamado, um aviso. É quase um 'grito'!",
+                "Geralmente vem com um ponto de exclamação (!).",
+                "**Exemplos Comuns:** `Ah!`, `Uau!`, `Oba!`, `Socorro!`, `Psiu!`, `Ai!`."
+                ],
+                visual: "Um ícone de um grande ponto de exclamação com balões de fala ao redor. Pequenas ilustrações de rostos expressando emoções diferentes, com a interjeição correspondente em um balão: um rosto surpreso (`Uau!`), um rosto feliz (`Oba!`), um rosto triste (`Ai!`)."
+            },
+            pratica: {
+                title: "5. Hora da Prática: Detetives da Língua!",
+                content: [
+                "Agora é com vocês, detetives das palavras! Vamos identificar as classes gramaticais em frases do dia a dia.",
+                "**Desafios Rápidos (3-4 frases curtas):**",
+                "- 'O `cachorro` `bonito` `corre` `muito` `bem`.' (identificar classes de cada palavra sublinhada).",
+                "- 'Maria `e` Pedro `foram` `ao` cinema.'",
+                "- ' `Que` legal! `Aquela` `menina` `é` `a` `primeira` `da` fila.'"
+                ],
+                visual: "Um ícone de uma lupa ou um chapéu de detetive. As frases podem aparecer com as palavras em destaque (talvez coloridas ou sublinhadas) e caixas de texto interativas para a resposta."
+            },
+            conclusion: {
+                title: "6. Conclusão: O Poder das Nossas Palavras!",
+                content: [
+                "Entender as classes gramaticais é como ter um 'superpoder' com as palavras!",
+                "Ajuda a:",
+                "- Escrever melhor e mais claro.",
+                "- Ler e entender textos mais complexos.",
+                "- Comunicar suas ideias com mais precisão.",
+                "A Língua Portuguesa é incrível, e vocês são capazes de dominá-la!",
+                "Mensagem final de incentivo do Professor Paulo Bispo."
+                ],
+                visual: "Uma imagem inspiradora de um livro aberto, de onde saem palavras 'voando' e se conectando, formando um mundo ou uma cidade. Um ícone de uma lâmpada acesa ou um 'joinha' gigante."
+            }
+        };
+
+        // As funções dos componentes React (agora com React.useState explícito e verificações)
+        const SectionView = ({ title, content, visual, onBack }) => {
+            const [loadingExplanation, setLoadingExplanation] = React.useState(false);
+            const [extraExplanation, setExtraExplanation] = React.useState('');
+            const [showExplanation, setShowExplanation] = React.useState(false);
+
+            // Função para gerar explicação extra usando a API Gemini
+            const generateExtraExplanation = async () => {
+                setLoadingExplanation(true);
+                setExtraExplanation(''); // Limpa a explicação anterior
+                setShowExplanation(true); // Garante que a área da explicação seja visível
+
+                const prompt = `Gere uma explicação adicional, clara e concisa, ou uma nova analogia, para o seguinte tópico de gramática. A explicação deve ser adequada para alunos do Ensino Fundamental II, com linguagem acessível e foco na compreensão prática. Não inclua saudações, introduções ou qualquer texto além da explicação em si.
+
+                Tópico: ${title}
+                Conteúdo principal: ${content.join(' ')}`;
+
+                try {
+                    let chatHistory = [];
+                    chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                    const payload = { contents: chatHistory };
+                    const apiKey = ""; // API key will be provided by the Canvas environment
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    const result = await response.json();
+
+                    if (result.candidates && result.candidates.length > 0 &&
+                        result.candidates[0].content && result.candidates[0].content.parts &&
+                        result.candidates[0].content.parts.length > 0) {
+                        const text = result.candidates[0].content.parts[0].text;
+                        setExtraExplanation(text);
+                    } else {
+                        setExtraExplanation("Não foi possível gerar uma explicação extra no momento. Tente novamente.");
+                    }
+                } catch (error) {
+                    console.error("Erro ao chamar a API Gemini:", error);
+                    setExtraExplanation("Ocorreu um erro ao buscar a explicação. Verifique sua conexão.");
+                } finally {
+                    setLoadingExplanation(false);
+                }
+            };
+
+            return (
+                <div className="absolute inset-0 flex flex-col items-center justify-center p-8 bg-white rounded-lg shadow-xl transform transition-all duration-500 ease-in-out scale-100 opacity-100 overflow-y-auto">
+                    <h2 className="text-4xl font-extrabold text-blue-800 mb-4 text-center">{title}</h2>
+                    <div className="text-gray-700 text-lg leading-relaxed max-w-2xl text-center space-y-2">
+                        {/* Adicionada verificação de 'content' antes de chamar map */}
+                        {content && content.map((item, index) => (
+                            <p key={index} dangerouslySetInnerHTML={{ __html: item }} />
+                        ))}
+                    </div>
+                    <div className="mt-6 p-4 bg-blue-50 rounded-lg shadow-inner text-sm text-gray-600 italic text-center max-w-lg">
+                        **Sugestão Visual:** {visual}
+                    </div>
+
+                    <button
+                        onClick={generateExtraExplanation}
+                        className="mt-8 px-6 py-3 bg-purple-600 text-white font-semibold rounded-full shadow-lg hover:bg-purple-700 transition-all duration-300 transform hover:scale-105 flex items-center justify-center"
+                        disabled={loadingExplanation}
+                    >
+                        {loadingExplanation ? (
+                            <span className="flex items-center">
+                                <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                </svg>
+                                Gerando...
+                            </span>
+                        ) : (
+                            <>✨ Gerar Explicação Extra ✨</>
+                        )}
+                    </button>
+
+                    {showExplanation && (
+                        <div className="mt-6 p-4 bg-yellow-50 border-l-4 border-yellow-400 text-yellow-800 rounded-lg max-w-2xl text-center shadow-md animate-fade-in">
+                            {extraExplanation ? (
+                                <p dangerouslySetInnerHTML={{ __html: extraExplanation }} />
+                            ) : (
+                                loadingExplanation ? <p>Preparando a explicação...</p> : <p>Clique no botão para gerar uma explicação extra!</p>
+                            )}
+                        </div>
+                    )}
+
+                    <button
+                        onClick={onBack}
+                        className="mt-8 px-6 py-3 bg-blue-600 text-white font-semibold rounded-full shadow-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105"
+                    >
+                        Voltar
+                    </button>
+                </div>
+            );
+        };
+
+        const ClassListView = ({ title, introContent, classes, onSelectClass, onBack }) => (
+            <div className="absolute inset-0 flex flex-col items-center justify-center p-8 bg-white rounded-lg shadow-xl transform transition-all duration-500 ease-in-out scale-100 opacity-100">
+                <h2 className="text-4xl font-extrabold text-blue-800 mb-4 text-center">{title}</h2>
+                <p className="text-gray-700 text-lg leading-relaxed max-w-2xl text-center mb-6">{introContent}</p>
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 max-w-3xl">
+                {/* Adicionada verificação de 'classes' antes de chamar map */}
+                {classes && classes.map((cls) => (
+                    <button
+                    key={cls.id}
+                    onClick={() => onSelectClass(cls.id)}
+                    className="flex flex-col items-center p-4 bg-gray-100 rounded-lg shadow-md hover:bg-gray-200 transition-all duration-300 transform hover:scale-105"
+                    >
+                    <span className="text-5xl mb-2">{cls.icon}</span>
+                    <span className="text-lg font-medium text-gray-800 text-center">{cls.title}</span>
+                    </button>
+                ))}
+                </div>
+                <button
+                onClick={onBack}
+                className="mt-8 px-6 py-3 bg-blue-600 text-white font-semibold rounded-full shadow-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105"
+                >
+                Voltar
+                </button>
+            </div>
+        );
+
+        // O componente principal da aplicação React
+        const App = () => {
+            // Acesso direto a React.useState
+            const [currentView, setCurrentView] = React.useState('main');
+            const [history, setHistory] = React.useState([]);
+
+            // Função para navegar para uma nova vista, adicionando a vista atual ao histórico
+            const navigateTo = (viewId) => {
+                setHistory([...history, currentView]);
+                setCurrentView(viewId);
+            };
+
+            // Função para voltar para a vista anterior usando o histórico
+            const goBack = () => {
+                if (history.length > 0) {
+                    const previousView = history.pop();
+                    setHistory([...history]);
+                    setCurrentView(previousView);
+                }
+            };
+
+            // Renderiza a vista principal (o "mapa" geral)
+            const renderMainView = () => (
+                <div className="relative w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-blue-100 to-purple-100 p-6 rounded-lg shadow-2xl overflow-hidden">
+                    <h1 className="text-5xl font-extrabold text-blue-900 mb-2 text-center drop-shadow-lg animate-fade-in">
+                        {presentationContent.main.title}
+                    </h1>
+                    <p className="text-xl text-gray-700 mb-10 text-center animate-fade-in delay-200">
+                        {presentationContent.main.subtitle}
+                    </p>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6 w-full max-w-4xl">
+                        {presentationContent.main.sections.map((section) => (
+                            <button
+                                key={section.id}
+                                onClick={() => navigateTo(section.id)}
+                                className={`flex flex-col items-center justify-center p-6 rounded-xl shadow-lg transform transition-all duration-500 hover:scale-105 hover:shadow-xl ${section.color} text-blue-900 font-bold text-xl text-center`}
+                            >
+                                <span className="text-6xl mb-3">{section.icon}</span>
+                                {section.title}
+                            </button>
+                        ))}
+                    </div>
+                    <p className="mt-8 text-gray-600 text-md animate-fade-in delay-500">
+                        Clique nos blocos para explorar o "mapa" da Língua Portuguesa!
+                    </p>
+                </div>
+            );
+
+            // Renderiza o conteúdo da vista atual baseado no estado
+            const renderCurrentContent = () => {
+                const currentData = presentationContent[currentView];
+
+                if (!currentData) {
+                    // Retorna uma mensagem de erro ou um fallback se o conteúdo não for encontrado
+                    return (
+                        <div className="absolute inset-0 flex flex-col items-center justify-center p-8 bg-white rounded-lg shadow-xl text-red-600 text-2xl text-center">
+                            Ops! O conteúdo para esta seção não foi encontrado.
+                            <button
+                                onClick={() => navigateTo('main')}
+                                className="mt-8 px-6 py-3 bg-blue-600 text-white font-semibold rounded-full shadow-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105"
+                            >
+                                Voltar ao Início
+                            </button>
+                        </div>
+                    );
+                }
+
+                if (currentView === 'variaveis' || currentView === 'invariaveis') {
+                    return (
+                        <ClassListView
+                            title={currentData.title}
+                            introContent={currentData.introContent}
+                            classes={currentData.classes}
+                            onSelectClass={navigateTo}
+                            onBack={goBack}
+                        />
+                    );
+                } else {
+                    return (
+                        <SectionView
+                            title={currentData.title}
+                            content={currentData.content}
+                            visual={currentData.visual}
+                            onBack={goBack}
+                        />
+                    );
+                }
+            };
+
+            return (
+                <div className="font-sans min-h-screen bg-gray-50 flex items-center justify-center p-4">
+                    <style>
+                        {`
+                        @keyframes fade-in {
+                            from { opacity: 0; transform: translateY(20px); }
+                            to { opacity: 1; transform: translateY(0); }
+                        }
+                        .animate-fade-in {
+                            animation: fade-in 0.8s ease-out forwards;
+                        }
+                        .animate-fade-in.delay-200 { animation-delay: 0.2s; }
+                        .animate-fade-in.delay-500 { animation-delay: 0.5s; }
+                        `}
+                    </style>
+                    <div className="relative w-full h-[80vh] max-w-screen-lg bg-white rounded-lg shadow-2xl overflow-hidden flex items-center justify-center">
+                        {currentView === 'main' ? renderMainView() : renderCurrentContent()}
+                    </div>
+                </div>
+            );
+        };
+
+        // Renderiza o componente App na div com id="root"
+        ReactDOM.render(<App />, document.getElementById('root'));
+        // ----- FIM DO CÓDIGO DO SEU COMPONENTE REACT -----
+    </script>
+</body>
+</html>
